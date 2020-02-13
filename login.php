@@ -172,7 +172,7 @@ function test_input($data) {
             <!-- /.col -->
           </div>
         </form>
-        Administrator: <a href="../VIP-IMS/" class="text-center">Login here</a><br>
+        Administrator: <a href="../vip-ims/" class="text-center">Login here</a><br>
         Powered by: <a href="http://www.unixondev.com" class="text-center">Unixon IT Creatives</a>
 
 
