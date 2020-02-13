@@ -74,7 +74,13 @@
                               echo "<td>" . $row['product'] . "</td>";
                               echo "<td>" . $row['qty'] . "</td>";
                               echo "<td>" . $row['remarks'] . "</td>";  
-                              echo "<td>" . $row['status'] . "</td>";  
+                              if($row['status']=='Pending'){
+                              echo "<td class='text-warning'>" . $row['status'] . "</td>";  
+                              } elseif($row['status']=='Approved') {
+                              echo "<td class='text-success'>" . $row['status'] . "</td>";  
+                              } else {
+                               echo "<td class='text-muted'>" . $row['status'] . "</td>";  
+                              } 
                               echo "<td>" . $row['created_at'] . "</td>";
                               echo "<td>";
 
