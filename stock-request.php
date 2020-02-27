@@ -114,12 +114,9 @@ function test_input($data) {
                   <form  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div class="row">
                       <div class="col-md-6">
-
-
                         <div class="form-group">
                           <label>Warehouse</label>
                           <input type="text" class="form-control" placeholder="pcs" name="warehouse" id="" value="<?php echo $warehouse_ac;?>" readonly>
-
 
                         </div>
 
@@ -129,7 +126,7 @@ function test_input($data) {
                             <option value="">SELECT PRODUCT</option>
                             <?php
                             $queryWarehouse = "";
-                            $queryWarehouse = "SELECT * FROM product_model WHERE type='retail'";
+                            $queryWarehouse = "SELECT * FROM product_model";
                             if($resultWarehouse = mysqli_query($link, $queryWarehouse)){
                               if(mysqli_num_rows($resultWarehouse) > 0){
                                 while($row = mysqli_fetch_array($resultWarehouse)){

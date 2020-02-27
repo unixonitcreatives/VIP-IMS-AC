@@ -25,6 +25,46 @@
             </a>
           </li>
 
+                    <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Invoice
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="invoice-add.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Invoice</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="invoice-manage.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Invoice</p>
+                </a>
+              </li>
+
+              <!-- <li class="nav-item">
+                <a href="invoice-paid.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Paid Invoice</p>
+                </a>
+              </li> -->
+
+              <!-- <li class="nav-item">
+                <a href="invoice-unpaid.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Unpaid Invoice</p>
+                </a>
+              </li> -->
+            </ul>
+          </li>
+
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cubes"></i>
@@ -55,6 +95,32 @@
                 </a>
               </li>
               
+            </ul>
+          </li>
+
+                    <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-address-card"></i>
+              <p>
+                Stockist
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="area-center-manage.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Stockists</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="stock-request-manage.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Manage Stock Requests</p>
+                </a>
+              </li>
             </ul>
           </li>
 
