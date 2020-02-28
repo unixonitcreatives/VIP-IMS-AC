@@ -1,5 +1,7 @@
 <?php include "session.php"; ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include "includes/header.php"; ?>
@@ -49,7 +51,7 @@
                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">No.</th>
                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Full Name</th>
                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Username</th>
-                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Warehouse Designation</th>
+                          
                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Created_by</th>
                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Created_at</th>
                           <th>Action</th>
@@ -60,8 +62,20 @@
                         // Include config file
                         require_once 'config.php';
 
+                        $account = $_SESSION['username'];
+                          $qry = "SELECT username, warehouse FROM area_center WHERE username = '$account'";
+                          $result = mysqli_query($link, $qry) or die(mysqli_error($link));
+
+                          if (mysqli_num_rows($result) > 0) {
+                            while($rows = mysqli_fetch_array($result)){
+                              $username = $rows['username'];
+                              $warehouse_ac = $rows['warehouse'];
+                              //echo "<script>alert('$warehouse_ac');</script>";
+                            }
+                          }
+                       
                         // Attempt select query execution
-                        $query = "SELECT * FROM area_center ORDER BY id DESC";
+                        $query = "SELECT * FROM stockist WHERE area_center = '$warehouse_ac' ORDER BY id DESC";
                         if($result = mysqli_query($link, $query)){
                           if(mysqli_num_rows($result) > 0){
                             $ctr = 0;
@@ -72,7 +86,6 @@
                               echo "<td>" . $ctr . "</td>";
                               echo "<td>" . $row['name'] . "</td>";
                               echo "<td>" . $row['username'] . "</td>";
-                              echo "<td>" . $row['warehouse'] . "</td>";
                               echo "<td>" . $row['created_by'] . "</td>";
                               echo "<td>" . $row['created_at'] . "</td>";
                               echo "<td>";

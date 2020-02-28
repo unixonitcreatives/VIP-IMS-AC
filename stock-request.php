@@ -88,7 +88,7 @@ function test_input($data) {
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item active">Stock Transfer</li>
+                <li class="breadcrumb-item active">Request Stock to MAIN</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -104,7 +104,7 @@ function test_input($data) {
               <div class="card">
                 <div class="card-header">
                   <div class="d-flex justify-content-between">
-                    <h3 class="card-title">Transfer Stocks</h3>
+                    <h3 class="card-title">Request Stock to MAIN</h3>
 
                   </div>
                 </div>

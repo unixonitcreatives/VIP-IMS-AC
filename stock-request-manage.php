@@ -62,8 +62,8 @@ if (mysqli_num_rows($result) > 0) {
                       <thead>
                         <tr>
                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">No.</th>
-                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Area Center</th>
-                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Warehouse</th>
+                          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Stockist</th>
+                          
                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Product</th>
                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Qty</th>
                           <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Remarks</th>
@@ -78,58 +78,68 @@ if (mysqli_num_rows($result) > 0) {
                         // Include config file
                         require_once 'config.php';
 
-                        // Attempt select query execution
-                        $query = "SELECT * FROM stock_request WHERE warehouse = '$warehouse_ac' ORDER BY status  DESC";
-                        if($result = mysqli_query($link, $query)){
-                          if(mysqli_num_rows($result) > 0){
-                            $ctr = 0;
-                            while($row = mysqli_fetch_array($result)){
-                              $ctr++;
-                              $id = $row['warehouse'];
-                              echo "<tr>";
-                              echo "<td>" . $ctr . "</td>";
-                              echo "<td>" . $row['created_by'] . "</td>";
-                              echo "<td><a href='warehouse-view.php?id=$id'>" . $row['warehouse'] . "</a></td>";
-                              
-                              echo "<td>" . $row['product'] . "</td>";
-                              echo "<td>" . $row['qty'] . "</td>";
-                              echo "<td>" . $row['remarks'] . "</td>";  
+                        $query1 = "SELECT * FROM stockist WHERE area_center = '$warehouse_ac'";
+                        if($result1 = mysqli_query($link, $query1)){
+                          if(mysqli_num_rows($result1) > 0){
+                            while($row1 = mysqli_fetch_array($result1)){
+                              $stockist_user = $row1['username'];
 
-                              if($row['status']=='Pending'){
-                              echo "<td class='text-warning'>" . $row['status'] . "</td>";  
-                              } elseif($row['status']=='Approved') {
-                              echo "<td class='text-success'>" . $row['status'] . "</td>";  
-                              } else {
-                               echo "<td class='text-muted'>" . $row['status'] . "</td>";  
-                              }
+                                          // Attempt select query execution
+                                          $query = "SELECT * FROM stock_request WHERE warehouse = '$stockist_user' ORDER BY status  DESC";
+                                          if($result = mysqli_query($link, $query)){
+                                            if(mysqli_num_rows($result) > 0){
+                                              $ctr = 0;
+                                              while($row = mysqli_fetch_array($result)){
+                                                $ctr++;
+                                                $id = $row['warehouse'];
+                                                echo "<tr>";
+                                                echo "<td>" . $ctr . "</td>";
+                                                echo "<td>" . $row['created_by'] . "</td>";
+                                                echo "<td>" . $row['product'] . "</td>";
+                                                echo "<td>" . $row['qty'] . "</td>";
+                                                echo "<td>" . $row['remarks'] . "</td>";  
 
-                              echo "<td>" . $row['created_at'] . "</td>";
-                              echo "<td>";
+                                                if($row['status']=='Pending'){
+                                                echo "<td class='text-warning'>" . $row['status'] . "</td>";  
+                                                } elseif($row['status']=='Approved') {
+                                                echo "<td class='text-success'>" . $row['status'] . "</td>";  
+                                                } else {
+                                                 echo "<td class='text-muted'>" . $row['status'] . "</td>";  
+                                                }
 
-                              if($row['status']=='Pending'){
-                              echo " &nbsp; <a href='request-approve.php?id=".$row['id']."' title='Approve Request' data-toggle='tooltip'><span class='fas fa fa-check'></span></a>";
+                                                echo "<td>" . $row['created_at'] . "</td>";
+                                                echo "<td>";
 
-                              echo " &nbsp; <a href='request-decline.php?id=".$row['id']."' title='Decline Request' data-toggle='tooltip'><span class='fas fa fa-times'></span></a>";
+                                                if($row['status']=='Pending'){
+                                                echo " &nbsp; <a href='request-approve.php?id=".$row['id']."' title='Approve Request' data-toggle='tooltip'><span class='fas fa fa-check'></span></a>";
 
-                              } else {
+                                                echo " &nbsp; <a href='request-decline.php?id=".$row['id']."' title='Decline Request' data-toggle='tooltip'><span class='fas fa fa-times'></span></a>";
 
-                              
+                                                } else { }
+                                                echo "</td>";
+                                                echo "</tr>";
+                                              }
+                                              // Free result set
+                                              mysqli_free_result($result);
+                                            } else{
+                                              echo "<p class='lead'><em>No records were found.</em></p>";
+                                            }
+                                          } else{
+                                            echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                                          }
 
-                              }
 
-                              
-                              //echo " &nbsp; <a href='user-delete.php?id=". $row['id'] ."' title='View Record' data-toggle='tooltip'><span class='fas fa fa-eye'></span></a>";
-                              echo "</td>";
-                              echo "</tr>";
+
+
+
+
                             }
-                            // Free result set
-                            mysqli_free_result($result);
-                          } else{
-                            echo "<p class='lead'><em>No records were found.</em></p>";
+
                           }
-                        } else{
-                          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+
                         }
+
+                        
 
                         // Close connection
                         mysqli_close($link);
