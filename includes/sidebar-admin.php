@@ -109,7 +109,7 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <a href="area-center-manage.php" class="nav-link">
+                <a href="stockist-view.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>View Stockists</p>
                 </a>

@@ -55,7 +55,7 @@ if(isset($_POST['fullypaid'])){
                 while($row = mysqli_fetch_array($result)){
                   $stocks_qty = $row['quantity'];
                   $stocks_product = $row['product'];
-                        if($stocks_qty <= $qty){
+                        if($stocks_qty < $qty){
                           echo "<script>alert('Insufficient stock in warehouse');
                           alert('$product');
                           window.location.href = 'invoice-add.php';</script>";
