@@ -48,7 +48,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                           $_SESSION["usertype"] = "Area Center";
 
                           //logs
-                          $info = $_SESSION['username_ac']." Logged In";
+                          $info = $_SESSION['username']." Logged In";
                           $info2 = "Details: ".$username.", ".$usertype." IP:".getRealIpAddr();
 
                           $query="
@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                           $result = mysqli_query($link, $query) or die(mysqli_error($link)); //Execute  insert query
                             if($result){
                               echo "<script>
-                              alert('successfull login');
+                              alert('successful login');
                               window.location.href='index.php';
                               </script>";
                               exit;
@@ -131,10 +131,10 @@ function test_input($data) {
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="icon" href="logo/VIP.png">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('dist/bg.jpg');background-repeat: no-repeat; background-size: cover;">
   <div class="login-box">
     <div class="login-logo">
-      <a href="index.php"><b>VIP</b>IMS AREA CENTER</a>
+      <a href="index.php" class="text-white"><b>VIP</b>-IMS AREA CENTER</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">
