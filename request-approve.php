@@ -121,7 +121,7 @@ $get_id = $_GET['id'];
 				$result = mysqli_query($link, $query) or die(mysqli_error($link)); //Execute  insert query
 				
 				if($result){
-					$query = "UPDATE `stocks` SET quantity = quantity - '$sr_qty' WHERE product ='$sr_product' AND warehouse ='$account'"; //Prepare insert query
+					$query = "UPDATE `stocks` SET quantity = quantity - '$sr_qty' WHERE product ='$sr_product' AND warehouse ='$sr_warehouse'"; //Prepare insert query
 					$result = mysqli_query($link, $query) or die(mysqli_error($link)); //Execute  insert query
 					if($result){   
 					$info = $_SESSION['username']."  approve stock request";
@@ -151,18 +151,19 @@ $get_id = $_GET['id'];
 				$result = mysqli_query($link, $query) or die(mysqli_error($link)); //Execute  insert query
 
 				if($result){
-					$query = "UPDATE `stocks` SET quantity = quantity - '$sr_qty' WHERE product ='$sr_product' AND warehouse ='$account'"; //Prepare insert query
+					$query = "UPDATE `stocks` SET quantity = quantity - '$sr_qty' WHERE product ='$sr_product' AND warehouse ='$sr_warehouse'"; //Prepare insert query
 					$result = mysqli_query($link, $query) or die(mysqli_error($link)); //Execute  insert query
+
 					if($result){   
-					$info = $_SESSION['username']."  approve stock request";
-					$info2 = "Details: ".$sr_product.", ".$sr_qty." pcs on: " .$sr_warehouse. " from: ".$account.".";
-					$alertlogsuccess = $sr_product.", ".$sr_qty." pcs: has been created and transfered succesfully!";
-					include "logs.php";
+						$info = $_SESSION['username']."  approve stock request";
+						$info2 = "Details: ".$sr_product.", ".$sr_qty." pcs on: " .$sr_warehouse. " from: ".$account.".";
+						$alertlogsuccess = $sr_product.", ".$sr_qty." pcs: has been created and transfered succesfully!";
+						include "logs.php";
 
-					$query = "UPDATE `stock_request` SET status = 'Approved'  WHERE id ='$get_id'"; //Prepare insert query
-					$result = mysqli_query($link, $query) or die(mysqli_error($link));
+						$query = "UPDATE `stock_request` SET status = 'Approved'  WHERE id ='$get_id'"; //Prepare insert query
+						$result = mysqli_query($link, $query) or die(mysqli_error($link));
 
-					echo "<script>window.location.href='stock-request-manage.php'</script>";
+						echo "<script>window.location.href='stock-request-manage.php'</script>";
 					} else {
 					echo "<script>alert('Failed deducting stocks from warehouse orig')</script>";
 					}
