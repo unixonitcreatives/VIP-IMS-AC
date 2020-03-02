@@ -23,6 +23,10 @@ if($result = mysqli_query($link, $qry)){
 			$sr_date = $row['created_at'];
 			//echo "<script>alert('$sr_product');</script>";
 		}
+	} else {
+		echo "<script>alert('This request ID doesnt exist.'); 
+		window.location.href='stock-request-manage.php';</script>"; 
+		die();
 	}
 }
 

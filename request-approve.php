@@ -1,4 +1,6 @@
 <?php
+	session_start();
+	require_once 'config.php';
   $Admin_auth = 1;
   $Stock_auth = 1;
   $Area_Center_auth = 0;
@@ -6,8 +8,6 @@
 ?>
 
 <?php
-session_start();
-require_once 'config.php';
 
 $username = $usertype ='';
 $username = $_SESSION['username'];
@@ -53,7 +53,7 @@ $get_id = $_GET['id'];
 		//Proceed
 	}
 
-	$qry = "SELECT * FROM area_center WHERE username ='$sr_created_by'";
+	$qry = "SELECT * FROM stockist WHERE username ='$sr_created_by'";
 	if($result = mysqli_query($link, $qry)){
 		if(mysqli_num_rows($result) > 0){
 			while($row = mysqli_fetch_array($result)){
@@ -71,14 +71,26 @@ $get_id = $_GET['id'];
 
 	}
 
-	$sql_check = "SELECT * FROM stocks WHERE product ='$sr_product' AND warehouse = 'MAIN'";
+
+	$account = $_SESSION['username'];
+	$qry = "SELECT username, warehouse FROM area_center WHERE username = '$account'";
+	$result = mysqli_query($link, $qry) or die(mysqli_error($link));
+	if (mysqli_num_rows($result) > 0) {
+	  while($rows = mysqli_fetch_array($result)){
+	    $username = $rows['username'];
+	    $warehouse_ac = $rows['warehouse'];
+	    //echo "<script>alert('$warehouse_ac');</script>";
+	  }
+	}
+
+	$sql_check = "SELECT * FROM stocks WHERE product ='$sr_product' AND warehouse = '$warehouse_ac'";
     if($result = mysqli_query($link, $sql_check)){
       if(mysqli_num_rows($result) > 0){
             while($row = mysqli_fetch_array($result)){
             $stocks_qty = $row['quantity'];
             $stocks_product = $row['product'];
                   if($stocks_qty < $sr_qty){
-                    echo "<script>alert('Insufficient Stock in MAIN Warehouse');
+                    echo "<script>alert('Insufficient Stock in $warehouse_ac Warehouse');
                     window.location.href = 'stock-request-manage.php';</script>";
                     die();
                   } else {
@@ -86,7 +98,7 @@ $get_id = $_GET['id'];
                   }
             } 
       } else {
-        echo "<script>alert('Stock doesnt exist in Warehouse MAIN');
+        echo "<script>alert('Stock doesnt exist in Warehouse');
         window.location.href = 'stock-request-manage.php';</script>"; 
         die();
       }
@@ -121,7 +133,7 @@ $get_id = $_GET['id'];
 				$result = mysqli_query($link, $query) or die(mysqli_error($link)); //Execute  insert query
 				
 				if($result){
-					$query = "UPDATE `stocks` SET quantity = quantity - '$sr_qty' WHERE product ='$sr_product' AND warehouse ='$account'"; //Prepare insert query
+					$query = "UPDATE `stocks` SET quantity = quantity - '$sr_qty' WHERE product ='$sr_product' AND warehouse ='$warehouse_ac'"; //Prepare insert query
 					$result = mysqli_query($link, $query) or die(mysqli_error($link)); //Execute  insert query
 					if($result){   
 					$info = $_SESSION['username']."  approve stock request";
