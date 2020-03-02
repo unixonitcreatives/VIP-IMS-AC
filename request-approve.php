@@ -121,7 +121,7 @@ $get_id = $_GET['id'];
 				$result = mysqli_query($link, $query) or die(mysqli_error($link)); //Execute  insert query
 				
 				if($result){
-					$query = "UPDATE `stocks` SET quantity = quantity - '$sr_qty' WHERE product ='$sr_product' AND warehouse ='$sr_warehouse'"; //Prepare insert query
+					$query = "UPDATE `stocks` SET quantity = quantity - '$sr_qty' WHERE product ='$sr_product' AND warehouse ='$account'"; //Prepare insert query
 					$result = mysqli_query($link, $query) or die(mysqli_error($link)); //Execute  insert query
 					if($result){   
 					$info = $_SESSION['username']."  approve stock request";
